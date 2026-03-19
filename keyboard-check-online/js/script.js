@@ -21,30 +21,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const progressPercentage = document.getElementById('progressPercentage');
     const progressBar = document.querySelector('.progress-bar');
     
-    // ===== MOBILE MENU TOGGLE - FINAL FIX =====
-    if (hamburger && mobileMenu) {
-        console.log('✅ Hamburger found');
+  // ===== MOBILE MENU TOGGLE - ULTIMATE FIX =====
+if (hamburger && mobileMenu) {
+    console.log('✅ Hamburger found');
+    
+    // Initially hide menu
+    mobileMenu.style.display = 'none';
+    
+    hamburger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('🍔 Clicked');
         
-        // Initially hide menu with hidden attribute
-        mobileMenu.setAttribute('hidden', '');
-        
-        hamburger.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const expanded = this.getAttribute('aria-expanded') === 'true' ? false : true;
-            this.setAttribute('aria-expanded', expanded);
-            
-            if (expanded) {
-                mobileMenu.removeAttribute('hidden');  // hidden hatao
-                document.body.style.overflow = 'hidden';
-                console.log('✅ Menu opened');
-            } else {
-                mobileMenu.setAttribute('hidden', ''); // hidden lagao
-                document.body.style.overflow = '';
-                console.log('✅ Menu closed');
-            }
-        });
+        if (mobileMenu.style.display === 'none') {
+            mobileMenu.style.display = 'block';
+            this.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+            console.log('✅ Menu opened');
+        } else {
+            mobileMenu.style.display = 'none';
+            this.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            console.log('✅ Menu closed');
+        }
+    });
 
         // Close on window resize
         window.addEventListener('resize', function() {
