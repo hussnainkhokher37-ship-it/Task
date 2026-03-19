@@ -21,28 +21,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const progressPercentage = document.getElementById('progressPercentage');
     const progressBar = document.querySelector('.progress-bar');
     
-    // ===== MOBILE MENU TOGGLE - FIXED =====
+    // ===== MOBILE MENU TOGGLE - FINAL FIX =====
     if (hamburger && mobileMenu) {
-        console.log('Hamburger found');
+        console.log('✅ Hamburger found');
         
-        // Initially hide menu
-        mobileMenu.style.display = 'none';
+        // Initially hide menu with hidden attribute
+        mobileMenu.setAttribute('hidden', '');
         
         hamburger.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Hamburger clicked');
+            e.stopPropagation();
             
             const expanded = this.getAttribute('aria-expanded') === 'true' ? false : true;
             this.setAttribute('aria-expanded', expanded);
             
             if (expanded) {
-                mobileMenu.style.display = 'block';
+                mobileMenu.removeAttribute('hidden');  // hidden hatao
                 document.body.style.overflow = 'hidden';
-                console.log('Menu opened');
+                console.log('✅ Menu opened');
             } else {
-                mobileMenu.style.display = 'none';
+                mobileMenu.setAttribute('hidden', ''); // hidden lagao
                 document.body.style.overflow = '';
-                console.log('Menu closed');
+                console.log('✅ Menu closed');
             }
         });
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', function() {
             if (window.innerWidth > 767) {
                 hamburger.setAttribute('aria-expanded', 'false');
-                mobileMenu.style.display = 'none';
+                mobileMenu.setAttribute('hidden', '');
                 document.body.style.overflow = '';
             }
         });
@@ -60,10 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
                 hamburger.setAttribute('aria-expanded', 'false');
-                mobileMenu.style.display = 'none';
+                mobileMenu.setAttribute('hidden', '');
                 document.body.style.overflow = '';
             });
         });
+    } else {
+        console.log('❌ Hamburger or mobile menu not found');
     }
 
     // ===== TASK TRACKER TOOL =====
@@ -298,20 +300,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 behavior: 'smooth'
             });
         });
-    }
-});
-
-// Initially hide menu using hidden attribute
-mobileMenu.setAttribute('hidden', '');
-
-hamburger.addEventListener('click', function(e) {
-    e.preventDefault();
-    
-    if (mobileMenu.hasAttribute('hidden')) {
-        mobileMenu.removeAttribute('hidden');
-        this.setAttribute('aria-expanded', 'true');
-    } else {
-        mobileMenu.setAttribute('hidden', '');
-        this.setAttribute('aria-expanded', 'false');
     }
 });
