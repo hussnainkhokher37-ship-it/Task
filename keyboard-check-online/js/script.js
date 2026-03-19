@@ -301,3 +301,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Initially hide menu using hidden attribute
+mobileMenu.setAttribute('hidden', '');
+
+hamburger.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    if (mobileMenu.hasAttribute('hidden')) {
+        mobileMenu.removeAttribute('hidden');
+        this.setAttribute('aria-expanded', 'true');
+    } else {
+        mobileMenu.setAttribute('hidden', '');
+        this.setAttribute('aria-expanded', 'false');
+    }
+});
