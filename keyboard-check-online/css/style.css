@@ -1390,3 +1390,22 @@ address a:hover {
         display: none !important;
     }
 }
+ /* Mobile Menu - FIXED */
+.mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+}
+
+.mobile-menu[hidden] {
+    display: none !important;
+}
+
+.mobile-menu:not([hidden]) {
+    display: block !important;
+}
